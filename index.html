@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MrCntral Company desarrolla apps, sistemas administrativos, automatizaciones y soluciones digitales para restaurantes, cevicherías y negocios locales." />
-  <meta name="keywords" content="MrCntral Company, sistemas para restaurantes, apps móviles, React Native, Node.js, PostgreSQL, automatización de negocios" />
+  <meta name="description" content="MrCntral Company desarrolla sistemas, apps y automatizaciones para restaurantes, cevicherías y negocios locales." />
+  <meta name="keywords" content="MrCntral Company, sistema para restaurante, sistema para cevichería, apps para negocios, pedidos, ventas, reportes" />
   <meta name="author" content="MrCntral Company" />
-  <meta name="theme-color" content="#07111f" />
-  <meta property="og:title" content="MrCntral Company | Soluciones digitales para negocios" />
-  <meta property="og:description" content="Apps, sistemas administrativos, automatizaciones, pedidos, reportes y control operativo para negocios reales." />
+  <meta name="theme-color" content="#0f4c81" />
+  <meta property="og:title" content="MrCntral Company | Sistemas para negocios" />
+  <meta property="og:description" content="Sistemas para pedidos, ventas, mesas, cocina, caja, reportes y control operativo." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mr-cntral.github.io/Apps-MrCntral-Company/" />
-  <title>MrCntral Company | Soluciones digitales para negocios</title>
+  <title>MrCntral Company | Sistemas para negocios</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
-  <div class="noise"></div>
-
   <header class="site-header" id="inicio">
     <nav class="nav container">
       <a class="brand" href="#inicio" aria-label="Inicio MrCntral Company">
@@ -33,75 +29,69 @@
       </button>
       <div class="nav-links">
         <a href="#soluciones">Soluciones</a>
-        <a href="#restaurante">Restaurante</a>
-        <a href="#flujo">Flujo</a>
-        <a href="#tecnologias">Tecnologías</a>
-        <a class="nav-cta" href="#contacto">Contacto</a>
+        <a href="#restaurante">Restaurantes</a>
+        <a href="#flujo">Cómo funciona</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <section class="hero section-pad">
+    <section class="hero" id="hero">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <span class="eyebrow">Sistemas reales para negocios reales</span>
-          <h1>Apps, paneles y automatización para operar mejor.</h1>
-          <p class="hero-subtitle">MrCntral Company desarrolla sistemas digitales para controlar pedidos, ventas, mesas, cocina, caja, reportes e inventario.</p>
+          <span class="eyebrow">Sistemas para negocios locales</span>
+          <h1>Controla pedidos, ventas y reportes desde un solo sistema.</h1>
+          <p class="hero-subtitle">Creamos apps y paneles administrativos para restaurantes, cevicherías, tiendas y empresas que necesitan trabajar con más orden.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#soluciones">Ver soluciones</a>
-            <a class="btn btn-secondary" href="#restaurante">Sistema restaurante</a>
+            <a class="btn btn-primary" href="https://wa.me/51929899484" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+            <a class="btn btn-secondary" href="#restaurante">Ver sistema restaurante</a>
           </div>
-          <div class="hero-kpis" aria-label="Capacidades principales">
-            <div><span data-count="6">0</span><small>áreas conectadas</small></div>
-            <div><span data-count="3">0</span><small>pantallas principales</small></div>
-            <div><span data-count="24">0</span><small>control operativo</small></div>
+          <div class="trust-row">
+            <span>Pedidos</span>
+            <span>Ventas</span>
+            <span>Reportes</span>
+            <span>Control</span>
           </div>
         </div>
 
-        <div class="hero-showcase reveal delay-1" aria-label="Representación visual de soluciones digitales">
-          <div class="device-stack">
-            <div class="desktop-screen visual-card">
-              <div class="screen-bar"><span></span><span></span><span></span><b>Admin dashboard</b></div>
-              <div class="chart-row">
-                <div class="chart-card tall"></div>
-                <div class="chart-card medium"></div>
-                <div class="chart-card short"></div>
-              </div>
-              <div class="dashboard-list">
-                <p><b></b>Mesa 04 · Pedido enviado a cocina</p>
-                <p><b></b>Barra · Bebidas en preparación</p>
-                <p><b></b>Caja · Cobro registrado</p>
-              </div>
+        <div class="hero-visual reveal delay-1" aria-label="Vista del sistema">
+          <div class="phone-mockup">
+            <div class="phone-top"></div>
+            <div class="app-header">
+              <strong>Mesas</strong>
+              <span>Hoy</span>
             </div>
-            <div class="phone-screen visual-card">
-              <div class="phone-notch"></div>
-              <strong>App trabajador</strong>
-              <div class="mini-table active">Mesa 01</div>
-              <div class="mini-table">Mesa 02</div>
-              <div class="mini-table warning">Mesa 03</div>
-              <button>Enviar pedido</button>
+            <div class="table-grid">
+              <div class="table-card active"><b>Mesa 01</b><small>Atendiendo</small></div>
+              <div class="table-card"><b>Mesa 02</b><small>Libre</small></div>
+              <div class="table-card warning"><b>Mesa 03</b><small>Cocina</small></div>
+              <div class="table-card paid"><b>Mesa 04</b><small>Cobrado</small></div>
             </div>
-            <div class="tablet-screen visual-card">
-              <strong>Cocina / Barra</strong>
-              <div class="order-chip">Recibido</div>
-              <div class="order-chip active">Preparando</div>
-              <div class="order-chip ready">Listo</div>
+            <div class="order-panel">
+              <span>Pedido actual</span>
+              <strong>Ceviche + bebida</strong>
+              <button>Enviar a cocina</button>
             </div>
           </div>
-          <div class="orbit-label label-one">PostgreSQL local</div>
-          <div class="orbit-label label-two">Socket.IO tiempo real</div>
-          <div class="orbit-label label-three">Red WiFi interna</div>
+          <div class="desktop-mockup">
+            <div class="desktop-bar"><span></span><span></span><span></span></div>
+            <h3>Panel del negocio</h3>
+            <div class="mini-metrics">
+              <div><small>Ventas</small><strong>Control</strong></div>
+              <div><small>Pedidos</small><strong>Tiempo real</strong></div>
+            </div>
+            <div class="mini-chart"><i></i><i></i><i></i><i></i></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad visual-strip reveal" aria-label="Resumen visual de capacidades">
-      <div class="container strip-grid">
-        <div><strong>Gestión</strong><span>mesas, pedidos, usuarios y caja</span></div>
-        <div><strong>Operación</strong><span>cocina, barra, atención y estados</span></div>
-        <div><strong>Datos</strong><span>reportes, calendario y control diario</span></div>
-        <div><strong>Escalabilidad</strong><span>apps móviles, web y sistemas internos</span></div>
+    <section class="section-pad intro-band reveal">
+      <div class="container intro-grid">
+        <article><strong>Para atención</strong><span>el trabajador toma pedidos desde celular o tablet.</span></article>
+        <article><strong>Para cocina y barra</strong><span>cada área recibe lo que debe preparar.</span></article>
+        <article><strong>Para administración</strong><span>el dueño ve ventas, caja, mesas y reportes.</span></article>
       </div>
     </section>
 
@@ -109,70 +99,57 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">Qué hacemos</span>
-          <h2>Soluciones digitales con diseño, datos y control.</h2>
-          <p>La idea no es solo tener una página o una app bonita. El objetivo es que el negocio trabaje con menos desorden, menos errores y más información útil.</p>
+          <h2>Sistemas simples de usar, pero completos por dentro.</h2>
+          <p>La web está pensada para que un cliente entienda rápido qué problema resuelve el sistema, sin leer detalles técnicos complicados.</p>
         </div>
         <div class="solution-grid">
-          <article class="solution-card reveal large-card">
-            <div class="card-visual app-visual"><span></span><span></span><span></span></div>
+          <article class="solution-card reveal">
+            <div class="icon-box">01</div>
             <h3>Apps móviles</h3>
-            <p>Interfaces para trabajadores, atención al cliente, cocina, barra, delivery o procesos internos.</p>
+            <p>Aplicaciones para trabajadores, atención, delivery, cocina, barra o procesos internos.</p>
           </article>
           <article class="solution-card reveal">
-            <div class="card-visual panel-visual"></div>
-            <h3>Paneles administrativos</h3>
-            <p>Control de ventas, productos, usuarios, reportes, caja y configuración.</p>
+            <div class="icon-box">02</div>
+            <h3>Panel administrador</h3>
+            <p>Vista central para controlar ventas, productos, usuarios, caja, pedidos y reportes.</p>
           </article>
           <article class="solution-card reveal">
-            <div class="card-visual db-visual"></div>
-            <h3>Backend y base de datos</h3>
-            <p>Servicios con Node.js, Express y PostgreSQL para guardar información con orden.</p>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-visual automation-visual"></div>
+            <div class="icon-box">03</div>
             <h3>Automatización</h3>
-            <p>Procesos repetitivos transformados en flujos más rápidos, medibles y confiables.</p>
-          </article>
-          <article class="solution-card reveal wide-card">
-            <div class="card-visual report-visual"></div>
-            <h3>Reportes e inteligencia de negocio</h3>
-            <p>Indicadores diarios, mensuales, vista calendario y análisis para saber qué está pasando en el negocio.</p>
+            <p>Procesos manuales convertidos en flujos más ordenados, rápidos y medibles.</p>
           </article>
           <article class="solution-card reveal">
-            <div class="card-visual wifi-visual"></div>
-            <h3>Sistemas locales por WiFi</h3>
-            <p>Una laptop o PC puede funcionar como servidor local para celulares y tablets dentro del local.</p>
+            <div class="icon-box">04</div>
+            <h3>Reportes claros</h3>
+            <p>Información diaria y mensual para saber qué se vendió, cómo se cobró y qué pasó en el negocio.</p>
           </article>
         </div>
       </div>
     </section>
 
     <section class="section-pad featured" id="restaurante">
-      <div class="container project-grid">
-        <div class="project-copy reveal">
+      <div class="container restaurant-grid">
+        <div class="restaurant-copy reveal">
           <span class="eyebrow">Proyecto destacado</span>
-          <h2>Sistema Reybar para cevichería y restaurante</h2>
-          <p>Sistema en desarrollo para restaurantes, cevicherías y negocios con atención por mesas. La arquitectura está preparada para operación local, pedidos en tiempo real y control administrativo.</p>
+          <h2>Sistema para restaurante y cevichería</h2>
+          <p>Solución en desarrollo para negocios con atención por mesas. Permite ordenar la toma de pedidos, enviar información a cocina o barra, cobrar y revisar reportes desde administración.</p>
           <div class="status-box">
-            <strong>Estado del proyecto</strong>
-            <span>Prototipo funcional y arquitectura preparada para producción local.</span>
-          </div>
-          <div class="tag-list">
-            <span>Servidor local</span><span>PostgreSQL</span><span>Panel admin</span><span>App trabajadores</span><span>Cocina</span><span>Barra</span><span>APK Android futuro</span>
+            <strong>Estado actual</strong>
+            <span>Prototipo funcional con arquitectura preparada para trabajo local en el negocio.</span>
           </div>
         </div>
-        <div class="system-orbit reveal delay-1">
-          <div class="core-node">
+        <div class="system-card reveal delay-1">
+          <div class="system-center">
             <span>Servidor local</span>
-            <strong>Laptop / PC</strong>
-            <small>Node.js + PostgreSQL</small>
+            <strong>Laptop o PC</strong>
+            <small>Base de datos PostgreSQL</small>
           </div>
-          <div class="satellite sat-a"><strong>Trabajador</strong><span>mesas y pedidos</span></div>
-          <div class="satellite sat-b"><strong>Cocina</strong><span>recibido · preparando · listo</span></div>
-          <div class="satellite sat-c"><strong>Barra</strong><span>bebidas y cócteles</span></div>
-          <div class="satellite sat-d"><strong>Admin</strong><span>ventas y reportes</span></div>
-          <div class="orbit-ring ring-a"></div>
-          <div class="orbit-ring ring-b"></div>
+          <div class="system-items">
+            <div><b>Trabajador</b><small>toma pedidos</small></div>
+            <div><b>Cocina</b><small>recibe platos</small></div>
+            <div><b>Barra</b><small>recibe bebidas</small></div>
+            <div><b>Admin</b><small>ve reportes</small></div>
+          </div>
         </div>
       </div>
     </section>
@@ -180,18 +157,15 @@
     <section class="section-pad" id="flujo">
       <div class="container">
         <div class="section-heading reveal">
-          <span class="eyebrow">Flujo operativo</span>
-          <h2>Del pedido al reporte, todo conectado.</h2>
-          <p>El flujo visual permite explicar al cliente cómo trabaja el sistema sin entrar en detalles técnicos innecesarios.</p>
+          <span class="eyebrow">Cómo funciona</span>
+          <h2>Un flujo fácil de entender.</h2>
+          <p>Así se ve el proceso para un restaurante o cevichería desde que el cliente pide hasta que el administrador revisa resultados.</p>
         </div>
-        <div class="timeline-flow reveal">
-          <div class="flow-track"></div>
-          <article><span>01</span><h3>Mozo toma pedido</h3><p>Mesa, productos, extras y bebidas.</p></article>
-          <article><span>02</span><h3>Servidor guarda</h3><p>Registro local en PostgreSQL.</p></article>
-          <article><span>03</span><h3>Cocina recibe</h3><p>Estados de producción en tiempo real.</p></article>
-          <article><span>04</span><h3>Barra prepara</h3><p>Bebidas y cócteles separados.</p></article>
-          <article><span>05</span><h3>Admin controla</h3><p>Mesas, caja, usuarios y pedidos.</p></article>
-          <article><span>06</span><h3>Reportes</h3><p>Día, mes, calendario y análisis.</p></article>
+        <div class="flow-list reveal">
+          <article><span>1</span><div><h3>El trabajador toma el pedido</h3><p>Selecciona mesa, productos, extras, bebidas o cócteles.</p></div></article>
+          <article><span>2</span><div><h3>Cocina y barra reciben</h3><p>Cada área ve lo que debe preparar y cambia el estado del pedido.</p></div></article>
+          <article><span>3</span><div><h3>Caja registra el cobro</h3><p>Puede ser efectivo, Yape, Plin, Izipay o bancos.</p></div></article>
+          <article><span>4</span><div><h3>El administrador revisa reportes</h3><p>Ventas diarias, mensuales, calendario y control operativo.</p></div></article>
         </div>
       </div>
     </section>
@@ -199,33 +173,29 @@
     <section class="section-pad modules" id="modulos">
       <div class="container">
         <div class="section-heading reveal">
-          <span class="eyebrow">Módulos del sistema</span>
-          <h2>Bloques listos para adaptarse a cada negocio.</h2>
-          <p>Cada módulo se puede activar, ajustar o ampliar según la forma real de trabajo del local.</p>
+          <span class="eyebrow">Módulos</span>
+          <h2>Todo lo necesario para manejar el negocio.</h2>
         </div>
         <div class="module-grid">
-          <article class="module-card reveal"><span>MES</span><h3>Mesas</h3><p>Mesas configurables, estados, unión de mesas y atención.</p></article>
-          <article class="module-card reveal"><span>CAR</span><h3>Carta</h3><p>Productos, categorías, extras, bebidas y cócteles editables.</p></article>
-          <article class="module-card reveal"><span>PED</span><h3>Pedidos</h3><p>Toma, edición, envío a cocina y seguimiento.</p></article>
-          <article class="module-card reveal"><span>COC</span><h3>Cocina</h3><p>Pantalla para producción y estados del pedido.</p></article>
-          <article class="module-card reveal"><span>BAR</span><h3>Barra</h3><p>Flujo independiente para bebidas y cócteles.</p></article>
-          <article class="module-card reveal"><span>CAJ</span><h3>Cobros</h3><p>Efectivo, Yape, Plin, Izipay y bancos.</p></article>
-          <article class="module-card reveal"><span>REP</span><h3>Reportes</h3><p>Resumen diario, mensual, calendario y análisis.</p></article>
-          <article class="module-card reveal"><span>CFG</span><h3>Configuración</h3><p>Usuarios, permisos, mesas, carta y parámetros.</p></article>
-          <article class="module-card reveal"><span>INV</span><h3>Inventario futuro</h3><p>Compras, movimientos, costos y control de insumos.</p></article>
+          <article class="module-card reveal"><h3>Mesas</h3><p>Control de mesas, estados y uniones.</p></article>
+          <article class="module-card reveal"><h3>Carta editable</h3><p>Productos, categorías, extras, bebidas y cócteles.</p></article>
+          <article class="module-card reveal"><h3>Pedidos</h3><p>Toma, edición y envío a cocina o barra.</p></article>
+          <article class="module-card reveal"><h3>Cocina</h3><p>Recibido, preparando, listo y entregado.</p></article>
+          <article class="module-card reveal"><h3>Cobros</h3><p>Efectivo, Yape, Plin, Izipay y bancos.</p></article>
+          <article class="module-card reveal"><h3>Reportes</h3><p>Ventas, calendario y análisis del negocio.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section-pad" id="tecnologias">
-      <div class="container tech-section reveal">
+      <div class="container tech-box reveal">
         <div>
-          <span class="eyebrow">Tecnologías</span>
-          <h2>Stack moderno para web, móvil y operación local.</h2>
-          <p>Herramientas pensadas para prototipos funcionales, sistemas internos y soluciones que pueden crecer hacia producción.</p>
+          <span class="eyebrow">Tecnología</span>
+          <h2>Preparado para celular, tablet y PC.</h2>
+          <p>Se pueden crear apps móviles, paneles web, sistemas locales por WiFi y prototipos para presentar a clientes.</p>
         </div>
-        <div class="tech-cloud">
-          <span>React Native</span><span>Expo</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Socket.IO</span><span>GitHub Pages</span><span>Android APK</span><span>Responsive UI</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+        <div class="tech-tags">
+          <span>React Native</span><span>Expo</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Socket.IO</span><span>GitHub Pages</span><span>Android APK</span>
         </div>
       </div>
     </section>
@@ -233,17 +203,16 @@
     <section class="section-pad" id="proyectos">
       <div class="container">
         <div class="section-heading reveal">
-          <span class="eyebrow">Más soluciones</span>
-          <h2>Otros sistemas que se pueden crear.</h2>
-          <p>Además del sistema para restaurantes, se pueden desarrollar plataformas internas para distintos negocios locales y empresas.</p>
+          <span class="eyebrow">Más sistemas</span>
+          <h2>También se pueden crear otras soluciones.</h2>
         </div>
-        <div class="project-cards">
-          <article class="reveal"><b></b><h3>Inventario</h3><p>Stock, movimientos y alertas.</p></article>
-          <article class="reveal"><b></b><h3>Ventas</h3><p>Registro, caja y métodos de pago.</p></article>
-          <article class="reveal"><b></b><h3>Trabajadores</h3><p>Roles, permisos y actividad.</p></article>
-          <article class="reveal"><b></b><h3>Delivery</h3><p>Pedidos, reparto y seguimiento.</p></article>
-          <article class="reveal"><b></b><h3>Paneles</h3><p>Dashboards para decisiones.</p></article>
-          <article class="reveal"><b></b><h3>Prototipos</h3><p>Validación visual para clientes.</p></article>
+        <div class="other-grid">
+          <article class="reveal"><h3>Inventario</h3><p>Stock, movimientos y control de productos.</p></article>
+          <article class="reveal"><h3>Ventas</h3><p>Registro de ventas, caja y métodos de pago.</p></article>
+          <article class="reveal"><h3>Trabajadores</h3><p>Roles, permisos y actividad.</p></article>
+          <article class="reveal"><h3>Delivery</h3><p>Pedidos, reparto y seguimiento.</p></article>
+          <article class="reveal"><h3>Paneles para negocios</h3><p>Dashboards claros para tomar decisiones.</p></article>
+          <article class="reveal"><h3>Prototipos</h3><p>Diseños funcionales para mostrar ideas a clientes.</p></article>
         </div>
       </div>
     </section>
@@ -253,12 +222,12 @@
         <div>
           <span class="eyebrow">Contacto</span>
           <h2>¿Quieres un sistema para tu negocio?</h2>
-          <p>Podemos convertir una operación manual en una solución digital con módulos, reportes, control y diseño adaptado a celular, tablet y PC.</p>
+          <p>Escríbeme y vemos qué necesita tu negocio: pedidos, ventas, reportes, inventario, trabajadores o una app interna.</p>
         </div>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="https://wa.me/51929899484" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          <a class="btn btn-primary" href="https://wa.me/51929899484" target="_blank" rel="noopener">WhatsApp: 929 899 484</a>
           <a class="btn btn-secondary" href="mailto:christopherandreefigueroareyes@gmail.com">Enviar correo</a>
-          <small>WhatsApp: 929 899 484 · Correo: christopherandreefigueroareyes@gmail.com</small>
+          <small>christopherandreefigueroareyes@gmail.com</small>
         </div>
       </div>
     </section>
@@ -266,7 +235,7 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> MrCntral Company. Soluciones digitales para negocios.</p>
+      <p>© <span id="year"></span> MrCntral Company. Sistemas y apps para negocios.</p>
       <a href="#inicio">Volver arriba</a>
     </div>
   </footer>
