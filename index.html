@@ -1,348 +1,397 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="MrCntral Company desarrolla apps, sistemas administrativos y automatizaciones para restaurantes, cevicherias y negocios locales."
-    />
-    <meta name="theme-color" content="#07111f" />
-    <meta property="og:title" content="MrCntral Company | Sistemas y apps para negocios" />
-    <meta
-      property="og:description"
-      content="Portafolio comercial de soluciones digitales, apps moviles, sistemas locales por WiFi, paneles administrativos y reportes."
-    />
-    <meta property="og:type" content="website" />
-    <title>MrCntral Company | Apps y sistemas para negocios</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="page-noise" aria-hidden="true"></div>
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">
-        <span class="brand-mark">MC</span>
-        <span>MrCntral Company</span>
-      </a>
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="nav-links" aria-label="Navegacion principal">
-        <a href="#soluciones">Soluciones</a>
-        <a href="#reybar">Sistema Reybar</a>
-        <a href="#implementacion">Implementacion</a>
-        <a href="#modulos">Modulos</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </header>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reybar — Costeo</title>
 
-    <main>
-      <section class="hero section" id="inicio">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Apps, sistemas y automatizacion para negocios reales</p>
-          <h1>MrCntral Company</h1>
-          <p class="hero-lead">
-            Desarrollo soluciones digitales para restaurantes, cevicherias, tiendas y empresas
-            locales que necesitan controlar pedidos, ventas, operaciones y reportes desde celular,
-            tablet o PC.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#soluciones">Ver soluciones</a>
-            <a class="button ghost" href="#reybar">Ver sistema restaurante</a>
-          </div>
-          <div class="hero-metrics" aria-label="Capacidades principales">
-            <span><strong>WiFi local</strong> operacion interna</span>
-            <span><strong>Tiempo real</strong> cocina y barra</span>
-            <span><strong>Reportes</strong> diarios y mensuales</span>
-          </div>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="logo">Rey<span>bar</span></div>
+    <span style="color:var(--muted);font-size:14px;">Sistema de costeo</span>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost btn-sm" id="btnSave">💾 Guardar</button>
+      <button class="btn btn-ghost btn-sm" id="btnExport">⬇ Exportar</button>
+      <button class="btn btn-ghost btn-sm" id="btnImport">⬆ Importar</button>
+      <button class="btn btn-danger btn-sm" id="btnReset">↩ Restablecer</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none">
+    </div>
+  </header>
+
+  <div class="main-wrap">
+
+    <!-- SIDEBAR NAV -->
+    <nav class="sidenav">
+      <span class="nav-section">Principal</span>
+      <button class="nav-btn active" data-tab="resumen"><span class="nav-icon">📊</span>Resumen</button>
+      <button class="nav-btn" data-tab="platos"><span class="nav-icon">🍽</span>Mis platos</button>
+      <button class="nav-btn" data-tab="ingredientes"><span class="nav-icon">🧾</span>Desglose de costos</button>
+
+      <span class="nav-section">Herramientas</span>
+      <button class="nav-btn" data-tab="produccion"><span class="nav-icon">🧮</span>Costeo por producción</button>
+      <button class="nav-btn" data-tab="promociones"><span class="nav-icon">🎁</span>Promociones</button>
+
+      <span class="nav-section">Avanzado</span>
+      <button class="nav-btn" data-tab="movimientos"><span class="nav-icon">📦</span>Compras registradas</button>
+      <button class="nav-btn" data-tab="respaldo"><span class="nav-icon">💾</span>Respaldo</button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- ═══════════════ RESUMEN ═══════════════ -->
+      <section class="section active" data-section="resumen">
+        <div class="page-head">
+          <h1>Resumen general</h1>
+          <p>Vista rápida de toda la carta: platos, costos y utilidad.</p>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Vista conceptual del sistema">
-          <div class="device desktop">
-            <div class="device-top">
-              <span></span><span></span><span></span>
-              <strong>Panel admin</strong>
+        <div class="row col-4" id="summaryKpis"></div>
+
+        <div class="sep"></div>
+
+        <div class="search-row">
+          <input type="text" id="menuSearch" placeholder="🔍  Buscar plato…">
+          <select id="menuCategoryFilter"></select>
+        </div>
+
+        <div id="menuDishCards" class="dish-grid"></div>
+      </section>
+
+      <!-- ═══════════════ PLATOS ═══════════════ -->
+      <section class="section" data-section="platos">
+        <div class="page-head">
+          <h1>Mis platos</h1>
+          <p>Agrega, edita o elimina platos. Cambia precio, costo y cantidad vendida por día.</p>
+        </div>
+        <div class="f-row" style="margin-bottom:14px;">
+          <button class="btn btn-primary" id="btnAddDish">＋ Agregar plato</button>
+        </div>
+        <div class="card" style="padding:0;">
+          <div class="table-wrap" style="border:none;border-radius:var(--radius);">
+            <table>
+              <thead>
+                <tr>
+                  <th>Activo</th><th>Nombre del plato</th><th>Categoría</th>
+                  <th>Precio venta (S/)</th><th>Costo plato (S/)</th><th>Vendidos/día</th>
+                  <th>Utilidad</th><th>Food cost</th><th>Estado</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="dishRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ INGREDIENTES ═══════════════ -->
+      <section class="section" data-section="ingredientes">
+        <div class="page-head">
+          <h1>Desglose de costos</h1>
+          <p>Elige un plato y desglosa de dónde sale su costo: proteína, guarnición, fritura, cortesías, etc.</p>
+        </div>
+
+        <div class="row col-2">
+          <div class="card">
+            <div class="card-title">Plato seleccionado</div>
+            <div class="f-row" style="margin-bottom:14px;">
+              <div class="f-group" style="flex:1">
+                <label class="lbl">Elegir plato</label>
+                <select id="ingredientDishSelect" style="width:100%;"></select>
+              </div>
+              <button class="btn btn-ghost" id="btnAddIngredient">＋ Añadir línea de costo</button>
             </div>
-            <div class="dashboard">
-              <div class="dash-card wide">
-                <small>Operacion diaria</small>
-                <strong>42</strong>
-                <div class="bars">
-                  <i style="height: 42%"></i><i style="height: 70%"></i><i style="height: 55%"></i>
-                  <i style="height: 86%"></i><i style="height: 62%"></i>
-                </div>
-              </div>
-              <div class="dash-card">
-                <small>Pedidos activos</small>
-                <strong>18</strong>
-              </div>
-              <div class="dash-card status-list">
-                <span>Recibido</span>
-                <span>Preparando</span>
-                <span>Listo</span>
-              </div>
+            <div id="ingredientEditor"></div>
+            <div class="f-row" style="margin-top:12px;">
+              <button class="btn btn-success" id="btnApplyIngredientSum">✔ Usar esta suma como costo del plato</button>
             </div>
           </div>
-          <div class="device phone">
-            <div class="phone-notch"></div>
-            <h3>Mesa 07</h3>
-            <p>Ceviche mixto</p>
-            <p>Chicha morada</p>
-            <button type="button">Enviar pedido</button>
-          </div>
-          <div class="signal-line"></div>
-        </div>
-      </section>
-
-      <section class="section" id="soluciones">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Que hacemos</p>
-          <h2>Sistemas digitales hechos para operar, vender y medir mejor.</h2>
-          <p>
-            Cada solucion se adapta al flujo real del negocio: atencion, caja, cocina, reportes,
-            inventario, trabajadores y automatizacion de procesos.
-          </p>
-        </div>
-        <div class="service-grid">
-          <article class="glass-card reveal">
-            <span class="card-icon app"></span>
-            <h3>Apps moviles</h3>
-            <p>Interfaces para celular y tablet con React Native / Expo, pensadas para trabajo diario.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-icon panel"></span>
-            <h3>Paneles administrativos</h3>
-            <p>Control de productos, categorias, ventas, usuarios, configuracion y reportes.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-icon data"></span>
-            <h3>Backend y datos</h3>
-            <p>APIs con Node.js, Express, PostgreSQL y arquitectura preparada para red local.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-icon flow"></span>
-            <h3>Automatizacion</h3>
-            <p>Procesos internos mas claros: pedidos, estados, cobros, reportes y seguimiento.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-icon report"></span>
-            <h3>Reportes inteligentes</h3>
-            <p>Resumen diario, mensual y calendario para entender ventas, productos y rendimiento.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-icon wifi"></span>
-            <h3>Sistemas locales por WiFi</h3>
-            <p>Servidor en laptop o PC conectado con apps internas del equipo de trabajo.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section feature" id="reybar">
-        <div class="feature-copy reveal">
-          <p class="eyebrow">Proyecto destacado</p>
-          <h2>Sistema Reybar para cevicheria y restaurante</h2>
-          <p>
-            Prototipo funcional de sistema operativo para restaurante: mozos, cocina, barra, caja,
-            administracion, reportes y base de datos local trabajando dentro de la misma red WiFi.
-          </p>
-          <div class="feature-tags">
-            <span>Servidor local</span>
-            <span>PostgreSQL</span>
-            <span>Socket.IO</span>
-            <span>Panel admin</span>
-            <span>APK Android en ruta</span>
-          </div>
-        </div>
-        <div class="architecture reveal" aria-label="Arquitectura del sistema">
-          <div class="arch-node main-server">
-            <span>Servidor</span>
-            <strong>Laptop / PC</strong>
-            <small>Node.js + PostgreSQL</small>
-          </div>
-          <div class="arch-grid">
-            <div class="arch-node"><span>Mozo</span><strong>Pedidos</strong><small>Tablet / celular</small></div>
-            <div class="arch-node"><span>Cocina</span><strong>Preparacion</strong><small>Tiempo real</small></div>
-            <div class="arch-node"><span>Barra</span><strong>Bebidas</strong><small>Estados</small></div>
-            <div class="arch-node"><span>Admin</span><strong>Control</strong><small>Reportes</small></div>
+          <div class="card">
+            <div class="card-title">Proporción del costo</div>
+            <div class="chart-box"><canvas class="chart" id="ingredientChart"></canvas></div>
           </div>
         </div>
       </section>
 
-      <section class="section proof-section" id="enfoque">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Enfoque de trabajo</p>
-          <h2>Una solucion pensada para el ritmo real de un negocio.</h2>
-          <p>
-            El objetivo no es mostrar una app bonita solamente. Es ordenar la operacion para que
-            cada area vea lo que necesita, el administrador tenga informacion y el negocio pueda
-            crecer con una base tecnica clara.
-          </p>
+      <!-- ═══════════════ COSTEO POR PRODUCCIÓN ═══════════════ -->
+      <section class="section" data-section="produccion">
+        <div class="page-head">
+          <h1>Costeo por producción</h1>
+          <p>¿Cuánto te costó preparar los platos de hoy? Pon cuántos platos hiciste, cuántas presas lleva cada uno y cuánto te costó cada presa.</p>
         </div>
-        <div class="proof-grid">
-          <article class="proof-card reveal">
-            <strong>1</strong>
-            <h3>Se entiende el flujo</h3>
-            <p>Mesas, trabajadores, productos, cocina, barra, caja y reportes se modelan segun el negocio.</p>
-          </article>
-          <article class="proof-card reveal">
-            <strong>2</strong>
-            <h3>Se arma el prototipo</h3>
-            <p>Primero se valida visualmente como trabajaria el sistema en celular, tablet y PC.</p>
-          </article>
-          <article class="proof-card reveal">
-            <strong>3</strong>
-            <h3>Se conecta la operacion</h3>
-            <p>Servidor local, base de datos y eventos en tiempo real permiten comunicar las areas.</p>
-          </article>
-          <article class="proof-card reveal">
-            <strong>4</strong>
-            <h3>Se mejora por etapas</h3>
-            <p>Reportes, APK Android, inventario y nuevas vistas pueden incorporarse sin rehacer todo.</p>
-          </article>
-        </div>
-      </section>
 
-      <section class="section flow-section" id="flujo">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Flujo del sistema</p>
-          <h2>Del pedido al reporte, todo conectado.</h2>
+        <div class="notice blue">
+          <strong>¿Cómo funciona?</strong><br>
+          Por cada producto que cocinaste hoy llenas una fila: nombre, cantidad de platos, presas por plato y costo por presa. El sistema calcula solo el costo total y cuánto te costó cada plato.
         </div>
-        <div class="flow-track reveal" aria-label="Flujo: trabajador, servidor, cocina, barra, admin, caja y reportes">
-          <div class="flow-step"><span>01</span><strong>Mozo</strong><small>Toma pedido</small></div>
-          <div class="flow-step"><span>02</span><strong>Servidor</strong><small>Guarda datos</small></div>
-          <div class="flow-step"><span>03</span><strong>Cocina</strong><small>Recibe platos</small></div>
-          <div class="flow-step"><span>04</span><strong>Barra</strong><small>Recibe bebidas</small></div>
-          <div class="flow-step"><span>05</span><strong>Caja</strong><small>Cobra</small></div>
-          <div class="flow-step"><span>06</span><strong>Reportes</strong><small>Actualiza</small></div>
-        </div>
-      </section>
 
-      <section class="section roles-section" id="interfaces">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Interfaces por rol</p>
-          <h2>Cada pantalla cumple una funcion especifica.</h2>
-        </div>
-        <div class="role-showcase reveal">
-          <article class="role-panel">
-            <span>Atencion</span>
-            <h3>Mozo / trabajador</h3>
-            <p>Selecciona mesa, registra productos, extras y envia el pedido.</p>
-            <div class="mini-list"><i></i><i></i><i></i></div>
-          </article>
-          <article class="role-panel">
-            <span>Produccion</span>
-            <h3>Cocina y barra</h3>
-            <p>Reciben pedidos separados y actualizan estados sin usar papel.</p>
-            <div class="mini-kanban"><b></b><b></b><b></b></div>
-          </article>
-          <article class="role-panel">
-            <span>Gestion</span>
-            <h3>Admin / caja</h3>
-            <p>Controla cobros, carta editable, mesas, reportes y configuracion.</p>
-            <div class="mini-chart-line"><i></i></div>
-          </article>
-        </div>
-      </section>
+        <!-- Filas de producción -->
+        <div id="prodRows" style="display:grid;gap:10px;margin-bottom:14px;"></div>
 
-      <section class="section" id="modulos">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Modulos</p>
-          <h2>Componentes clave para restaurantes y negocios locales.</h2>
-        </div>
-        <div class="module-grid">
-          <article class="module-card reveal"><span></span><h3>Mesas</h3><p>Mesas configurables, estados y uniones de mesas.</p></article>
-          <article class="module-card reveal"><span></span><h3>Carta editable</h3><p>Productos, categorias, extras, bebidas y cocteles.</p></article>
-          <article class="module-card reveal"><span></span><h3>Pedidos</h3><p>Recepcion, envio y seguimiento por estado.</p></article>
-          <article class="module-card reveal"><span></span><h3>Cocina</h3><p>Vista de preparacion para platos y tiempos de atencion.</p></article>
-          <article class="module-card reveal"><span></span><h3>Barra</h3><p>Bebidas separadas para producir sin confundir cocina.</p></article>
-          <article class="module-card reveal"><span></span><h3>Cobros</h3><p>Efectivo, Yape, Plin, Izipay, bancos y control de caja.</p></article>
-          <article class="module-card reveal"><span></span><h3>Reportes</h3><p>Resumen diario, mensual, calendario y ventas por producto.</p></article>
-          <article class="module-card reveal"><span></span><h3>Configuracion</h3><p>Usuarios, negocio, parametros, red local y futuras APK.</p></article>
-          <article class="module-card reveal"><span></span><h3>Inventario futuro</h3><p>Base preparada para control de insumos y movimientos.</p></article>
-        </div>
-      </section>
+        <button class="btn btn-ghost" id="btnAddProdRow">＋ Agregar otro producto</button>
 
-      <section class="section deploy-section" id="implementacion">
-        <div class="deploy-card reveal">
-          <div>
-            <p class="eyebrow">Implementacion local</p>
-            <h2>Arquitectura preparada para trabajar dentro del local.</h2>
-            <p>
-              El sistema puede operar con una laptop o PC como servidor, PostgreSQL como base de
-              datos y dispositivos conectados por la red WiFi del negocio. Las funciones avanzan por
-              etapas para mantener claridad: primero flujo principal, luego reportes, APK e inventario.
-            </p>
+        <!-- Resultado -->
+        <div id="prodResult" style="display:none;margin-top:22px;">
+          <div class="sep" style="margin-top:0;"></div>
+          <div style="font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;">📋 Resultado de hoy</div>
+          <div id="prodResultKpis" class="row col-4" style="margin-bottom:14px;"></div>
+          <div class="card" style="padding:0;">
+            <div class="table-wrap" style="border:none;border-radius:var(--radius);">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Plato / Producto</th><th>Platos hechos</th><th>Presas por plato</th>
+                    <th>Total presas</th><th>Costo por presa</th><th>Costo por plato</th><th>Costo total</th>
+                  </tr>
+                </thead>
+                <tbody id="prodResultBody"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="deploy-stack" aria-label="Componentes de implementacion">
-            <span>PC servidor</span>
-            <span>Router WiFi</span>
-            <span>Celulares / tablets</span>
-            <span>Panel web admin</span>
-            <span>Base PostgreSQL</span>
-            <span>Tiempo real</span>
+          <div class="row col-2" style="margin-top:12px;">
+            <div class="notice green">💡 <strong>Costo por plato</strong> = presas × costo por presa. Compáralo con tu precio de venta para ver tu ganancia real.</div>
+            <div class="notice yellow">⚠ Si el costo por plato es mayor al 35–45% del precio de venta, revisa la porción o el precio.</div>
           </div>
         </div>
       </section>
 
-      <section class="section tech-section" id="tecnologias">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Tecnologias</p>
-          <h2>Stack moderno para prototipos funcionales y sistemas locales.</h2>
+      <!-- ═══════════════ PROMOCIONES ═══════════════ -->
+      <section class="section" data-section="promociones">
+        <div class="page-head">
+          <h1>Promociones</h1>
+          <p>Crea combos y el sistema calcula si realmente convienen. Puede ser plato + plato, plato + bebida, etc.</p>
         </div>
-        <div class="tech-cloud reveal" aria-label="Tecnologias utilizadas">
-          <span>React Native</span>
-          <span>Expo</span>
-          <span>Node.js</span>
-          <span>Express</span>
-          <span>PostgreSQL</span>
-          <span>Socket.IO</span>
-          <span>GitHub Pages</span>
-          <span>Android APK</span>
-          <span>Responsive UI</span>
+
+        <div class="row col-2">
+          <div class="card">
+            <div class="card-title">Nueva promoción</div>
+            <div class="f-group" style="margin-bottom:10px;">
+              <label class="lbl">Nombre de la promoción</label>
+              <input type="text" id="promoName" placeholder="Ej: Combo Marino" style="width:100%;">
+            </div>
+            <div class="f-row" style="margin-bottom:12px;">
+              <div class="f-group">
+                <label class="lbl">Precio promocional (S/)</label>
+                <input type="number" id="promoPrice" step="0.5" min="0" placeholder="0.00">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Ventas por día</label>
+                <input type="number" id="promoQty" step="1" min="0" placeholder="0">
+              </div>
+            </div>
+            <label class="lbl" style="margin-bottom:6px;">Platos incluidos en la promo</label>
+            <div id="promoDishChecks" class="checkbox-grid"></div>
+            <div class="f-row" style="margin-top:12px;">
+              <button class="btn btn-primary" id="btnAddPromo">Guardar promoción</button>
+              <button class="btn btn-ghost" id="btnClearPromo">Limpiar</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Vista previa</div>
+            <div id="promoPreview" class="notice blue">Selecciona platos y escribe un precio para ver si la promo conviene.</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:12px;">Promociones guardadas</div>
+        <div class="card" style="padding:0;">
+          <div class="table-wrap" style="border:none;border-radius:var(--radius);">
+            <table>
+              <thead>
+                <tr>
+                  <th>Activa</th><th>Nombre</th><th>Platos</th><th>Precio normal</th>
+                  <th>Precio promo</th><th>Costo</th><th>Utilidad</th><th>Food cost</th><th>Estado</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="promoRows"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <section class="section other-work" id="proyectos">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Otras soluciones</p>
-          <h2>Tambien puedo crear sistemas internos para distintos negocios.</h2>
+      <!-- ═══════════════ MOVIMIENTOS ═══════════════ -->
+      <section class="section" data-section="movimientos">
+        <div class="page-head">
+          <h1>Compras registradas</h1>
+          <p>Registra lo que compras día a día. El sistema calcula cuánto te cuesta cada kg útil y cada porción.</p>
         </div>
-        <div class="project-list reveal">
-          <span>Inventario</span>
-          <span>Ventas</span>
-          <span>Control de trabajadores</span>
-          <span>Apps para delivery</span>
-          <span>Paneles para negocios</span>
-          <span>Prototipos para clientes</span>
-          <span>Apps internas para empresas</span>
-          <span>Automatizacion de procesos</span>
+
+        <div class="row col-2">
+          <div class="card">
+            <div class="card-title">Registrar compra</div>
+            <div class="row col-2" style="gap:10px;">
+              <div class="f-group">
+                <label class="lbl">Fecha</label>
+                <input type="date" id="movDate" style="width:100%;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Producto</label>
+                <select id="movProductSelect" style="width:100%;"></select>
+                <input type="text" id="movProductOther" class="other-input" placeholder="Escribe el producto" style="display:none;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Parte / tipo</label>
+                <select id="movPart" style="width:100%;"></select>
+                <input type="text" id="movPartOther" class="other-input" placeholder="Escribe la parte o tipo" style="display:none;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Tipo de movimiento</label>
+                <select id="movType" style="width:100%;">
+                  <option value="compra">Compra</option>
+                  <option value="ajuste">Ajuste</option>
+                  <option value="merma">Merma</option>
+                </select>
+              </div>
+              <div class="f-group">
+                <label class="lbl">Cantidad</label>
+                <input type="number" step="0.01" min="0" id="movQty" placeholder="Ej: 10" style="width:100%;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Unidad</label>
+                <select id="movUnit" style="width:100%;">
+                  <option value="kg">kg</option>
+                  <option value="unidad">unidad</option>
+                  <option value="presa">presa</option>
+                  <option value="bolsa">bolsa</option>
+                </select>
+              </div>
+              <div class="f-group">
+                <label class="lbl">Costo total (S/)</label>
+                <input type="number" step="0.1" min="0" id="movCost" placeholder="Ej: 95" style="width:100%;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Merma %</label>
+                <input type="number" step="1" min="0" max="100" id="movWaste" value="0" style="width:100%;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Porción usada (kg)</label>
+                <input type="number" step="0.001" min="0" id="movPortion" placeholder="Ej: 0.25" style="width:100%;">
+              </div>
+              <div class="f-group">
+                <label class="lbl">Plato relacionado</label>
+                <select id="movDish" style="width:100%;"></select>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:14px;" id="btnAddMovement">＋ Registrar</button>
+          </div>
+          <div class="card">
+            <div class="card-title">Resumen de compras</div>
+            <div class="row col-3" id="movementKpis" style="margin-bottom:12px;"></div>
+            <div id="movementAdvice"></div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="f-row" style="margin-bottom:12px;">
+          <div style="font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:700;color:#fff;flex:1;">Historial de compras</div>
+          <button class="btn btn-ghost btn-sm" id="btnExportMovements">⬇ Exportar CSV</button>
+          <button class="btn btn-danger btn-sm" id="btnClearMovements">🗑 Borrar todo</button>
+        </div>
+        <div class="card" style="padding:0;">
+          <div class="table-wrap" style="border:none;border-radius:var(--radius);max-height:400px;overflow-y:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th><th>Producto</th><th>Parte</th><th>Tipo</th><th>Cantidad</th>
+                  <th>Costo</th><th>Costo útil/kg</th><th>Costo por porción</th><th>Plato</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="movementRows"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <section class="section contact-section" id="contacto">
-        <div class="contact-card reveal">
-          <div>
-            <p class="eyebrow">Contacto</p>
-            <h2>Quieres un sistema para tu negocio?</h2>
-            <p>
-              Cuentalo como funciona tu atencion, ventas o control interno. Se puede preparar una
-              solucion adaptable al negocio, desde prototipo hasta sistema local por WiFi.
-            </p>
+      <!-- ═══════════════ RESPALDO ═══════════════ -->
+      <section class="section" data-section="respaldo">
+        <div class="page-head">
+          <h1>Respaldo de datos</h1>
+          <p>Exporta un archivo JSON para guardar todos tus platos, costos y promociones.</p>
+        </div>
+        <div class="row col-2">
+          <div class="card">
+            <div class="card-title">Exportar / Importar</div>
+            <p class="card-sub">Los datos se guardan automáticamente en este navegador. Además puedes exportar un paquete técnico con estructura normalizada para pasarlo a una app real, backend, Excel o base de datos.</p>
+            <div class="export-grid">
+              <button class="btn btn-primary" id="btnExport2">⬇ Respaldo JSON</button>
+              <button class="btn btn-ghost" id="btnImport2">⬆ Importar JSON</button>
+              <button class="btn btn-success" id="btnExportPackage">📦 Paquete para sistema real</button>
+              <button class="btn btn-ghost" id="btnExportAllCsv">📄 CSV maestro</button>
+              <button class="btn btn-ghost" id="btnCopyJson">📋 Copiar JSON</button>
+            </div>
+            <div class="sep"></div>
+            <div class="notice blue">
+              <strong>Estructura exportada:</strong> platos, ingredientes, promociones, relación promo-platos, compras/movimientos, métricas calculadas, datos de configuración y bitácora de cambios.
+            </div>
+            <textarea id="jsonBox" readonly></textarea>
+            <div class="sep"></div>
+            <div class="card-title">Últimos cambios guardados</div>
+            <div id="auditBox" class="audit-list"></div>
           </div>
-          <div class="contact-actions">
-            <a class="button primary" href="https://wa.me/51929899484" target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
-            <a class="button ghost" href="mailto:contacto@mrcntral.com">correo editable</a>
+          <div class="card">
+            <div class="card-title">Leyenda de colores</div>
+            <div style="display:grid;gap:8px;">
+              <div class="notice green">🟢 <strong>Rentable</strong> — Food cost ≤ 35%. Margen sano, puedes impulsar este plato.</div>
+              <div class="notice yellow">🟡 <strong>Ajustado</strong> — Food cost entre 35% y 45%. Conviene revisar costo, porción o precio.</div>
+              <div class="notice red">🔴 <strong>Peligroso / Pérdida</strong> — Food cost > 45% o utilidad negativa. Requiere atención inmediata.</div>
+              <div class="notice blue">📌 <strong>Utilidad bruta</strong> = Precio de venta menos costo directo del plato. No incluye gastos fijos como luz, agua o personal.</div>
+            </div>
           </div>
         </div>
       </section>
+
     </main>
+  </div>
+</div>
 
-    <footer class="site-footer">
-      <span>MrCntral Company</span>
-      <span>Desarrollo de apps, sistemas y soluciones digitales para negocios.</span>
-    </footer>
+<!-- CHECKBOX GRID style (inside promo section) -->
 
-    <script src="script.js"></script>
-  </body>
+
+
+
+<!-- MODAL PARA AGREGAR PLATO -->
+<div id="addDishModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>Agregar nuevo plato</h2>
+      <button class="modal-close" id="btnCloseModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="f-group">
+        <label class="lbl">Nombre del plato</label>
+        <input type="text" id="modalDishName" placeholder="Ej: Ceviche de Conchas Negras" style="width: 100%;">
+      </div>
+      <div class="f-group">
+        <label class="lbl">Categoría</label>
+        <select id="modalDishCategory" style="width: 100%;"></select>
+        <input type="text" id="modalDishCategoryOther" class="other-input" placeholder="Escribe la categoría" style="display: none; width: 100%;">
+      </div>
+      <div class="f-row" style="margin-top: 6px;">
+        <div class="f-group" style="flex: 1;">
+          <label class="lbl">Precio venta (S/)</label>
+          <input type="number" step="0.1" min="0" id="modalDishPrice" placeholder="0.00" style="width: 100%;">
+        </div>
+        <div class="f-group" style="flex: 1;">
+          <label class="lbl">Costo plato (S/)</label>
+          <input type="number" step="0.1" min="0" id="modalDishCost" placeholder="0.00" style="width: 100%;">
+        </div>
+        <div class="f-group" style="flex: 1;">
+          <label class="lbl">Vendidos/día</label>
+          <input type="number" step="1" min="0" id="modalDishQty" placeholder="0" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="btnCancelModal">Cancelar</button>
+      <button class="btn btn-primary" id="btnSaveModal">Guardar plato</button>
+    </div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
 </html>
